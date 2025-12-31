@@ -9,11 +9,3 @@ variable "project_name" {
 variable "environment" {
   default = "prod"
 }
-
-variable "public_subnets" {
-  type = list(string)
-}
-
-variable "instance_type" {
-  default = "t3.micro"  # Free Tier eligible
-}

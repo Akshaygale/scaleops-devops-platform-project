@@ -11,7 +11,7 @@ data "aws_ami" "amazon_linux" {
 resource "aws_launch_template" "app" {
   name_prefix = "${var.project_name}-lt"
   image_id = data.aws_ami.amazon_linux.id
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
 
   tag_specifications {
     resource_type = "instance"
@@ -32,7 +32,7 @@ resource "aws_autoscaling_group" "app_asg" {
     version = "$Latest"
   }
 
-  vpc_zone_identifier = [] #see later
+  vpc_zone_identifier = var.public_subnets
 
   tag {
     key = "Projetc"
