@@ -24,6 +24,11 @@ resource "aws_launch_template" "app" {
 
   user_data = base64encode(data.template_file.user_data.rendered)
 
+  network_interfaces {
+    associate_public_ip_address = true
+    device_index = 0
+  }
+
   tag_specifications {
     resource_type = "instance"
     tags = {
