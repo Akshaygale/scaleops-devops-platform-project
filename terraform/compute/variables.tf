@@ -17,3 +17,8 @@ variable "public_subnets" {
 variable "instance_type" {
   default = "t3.micro"  # Free Tier eligible
 }
+
+variable "ecr_url" {
+  description = "ECR repository URL for the Docker image"
+  type        = string
+}

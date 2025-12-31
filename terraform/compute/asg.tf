@@ -1,3 +1,12 @@
+#this is for ECR url
+data "template_file" "user_data" {
+  template = file("${path.module}/user_data.sh") # your script path
+
+  vars = {
+    ecr_url = var.ecr_url
+  }
+}
+
 data "aws_ami" "amazon_linux" {
   most_recent = true
   owners = ["amazon"]

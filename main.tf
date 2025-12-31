@@ -10,14 +10,14 @@ module "alb" {
   environment    = var.environment
 }
 
-
 module "ecr" {
   source = "./terraform/ecr"
 }
 
 module "compute" {
   source         = "./terraform/compute"
+  public_subnets = module.vpc.public_subnets
+  ecr_url        = module.ecr.repository_url
   project_name   = var.project_name
   environment    = var.environment
-  public_subnets = module.vpc.public_subnets
 }
