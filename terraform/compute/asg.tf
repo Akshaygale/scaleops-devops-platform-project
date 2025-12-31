@@ -3,7 +3,7 @@ data "template_file" "user_data" {
   template = file("${path.module}/user_data.sh") # your script path
 
   vars = {
-    ecr_url = var.ecr_url
+    ECR_URL = var.ecr_url
   }
 }
 
@@ -21,6 +21,8 @@ resource "aws_launch_template" "app" {
   name_prefix = "${var.project_name}-lt"
   image_id = data.aws_ami.amazon_linux.id
   instance_type = var.instance_type
+
+  user_data = base64encode(data.template_file.user_data.rendered)
 
   tag_specifications {
     resource_type = "instance"
